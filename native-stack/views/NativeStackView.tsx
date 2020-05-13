@@ -33,12 +33,14 @@ export default function NativeStackView({
 
   return (
     <ScreenStack style={styles.container}>
-      {state.routes.map(route => {
+      {state.routes.map((route) => {
         const { options, render: renderScene } = descriptors[route.key];
         const {
           gestureEnabled,
           stackPresentation = 'push',
           stackAnimation,
+          statusBarStyle,
+          statusBarAnimation,
           contentStyle,
         } = options;
 
@@ -49,6 +51,8 @@ export default function NativeStackView({
             gestureEnabled={Platform.OS === 'android' ? false : gestureEnabled}
             stackPresentation={stackPresentation}
             stackAnimation={stackAnimation}
+            statusBarStyle={statusBarStyle}
+            statusBarAnimation={statusBarAnimation}
             onAppear={() => {
               navigation.emit({
                 type: 'appear',

@@ -5208,9 +5208,7 @@ react-native-safe-area-view@^0.14.1:
     debounce "^1.2.0"
 
 "react-native-screens@file:..":
-  version "2.5.0"
-  dependencies:
-    debounce "^1.2.0"
+  version "2.7.0"
 
 react-native-tab-view@^1.2.0, react-native-tab-view@^1.4.1:
   version "1.4.1"

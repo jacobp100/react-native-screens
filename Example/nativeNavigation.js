@@ -59,6 +59,7 @@ const AppStack = createNativeStackNavigator(
           // backgroundColor: 'transparent',
         },
         headerTintColor: 'black',
+        statusBarStyle: 'light-content',
         // translucent: true,
         // largeTitle: true,
       }),
@@ -74,7 +75,8 @@ const AppStack = createNativeStackNavigator(
         headerStyle: {
           backgroundColor: '#3da4ab',
         },
-        headerTintColor: 'black',
+        headerTintColor: 'white',
+        statusBarStyle: 'light-content',
         // header: null,
         // translucent: true,
         // gestureEnabled: false,
@@ -91,7 +93,12 @@ const AppStack = createNativeStackNavigator(
 
 const App = createNativeStackNavigator(
   {
-    Root: { screen: AppStack },
+    Root: {
+      screen: AppStack,
+      navigationOptions: {
+        statusBarStyle: 'dark-content',
+      },
+    },
     Modal: PushScreen,
   },
   {

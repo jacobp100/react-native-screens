@@ -26,6 +26,8 @@
     _controller = [[RNSScreen alloc] initWithView:self];
     _stackPresentation = RNSScreenStackPresentationPush;
     _stackAnimation = RNSScreenStackAnimationDefault;
+    _statusBarStyle = UIStatusBarStyleLightContent;
+    _statusBarAnimation = UIStatusBarAnimationNone;
     _gestureEnabled = YES;
     _dismissed = NO;
   }
@@ -148,6 +150,17 @@
   _gestureEnabled = gestureEnabled;
 }
 
+- (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle
+{
+  _statusBarStyle = statusBarStyle;
+  [_controller setNeedsStatusBarAppearanceUpdate];
+}
+
+- (void)setStatusBarAnimation:(UIStatusBarAnimation)statusBarAnimation
+{
+  _statusBarAnimation = statusBarAnimation;
+}
+
 - (UIView *)reactSuperview
 {
   return _reactSuperview;
@@ -264,6 +277,23 @@
   return self;
 }
 
+- (UIViewController *)childViewControllerForStatusBarStyle
+{
+    UIViewController* lastViewController = [[self childViewControllers] lastObject];
+    return [lastViewController childViewControllerForStatusBarStyle] ?: lastViewController;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    NSLog(@"%i %@ %@", (long)[((RNSScreenView *)self.view) statusBarStyle], self, [self childViewControllers]);
+  return [((RNSScreenView *)self.view) statusBarStyle];
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+  return [((RNSScreenView *)self.view) statusBarAnimation];
+}
+
 - (void)viewDidLayoutSubviews
 {
   [super viewDidLayoutSubviews];
@@ -332,6 +362,8 @@ RCT_EXPORT_VIEW_PROPERTY(stackPresentation, RNSScreenStackPresentation)
 RCT_EXPORT_VIEW_PROPERTY(stackAnimation, RNSScreenStackAnimation)
 RCT_EXPORT_VIEW_PROPERTY(onAppear, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onDismissed, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(statusBarStyle, UIStatusBarStyle);
+RCT_EXPORT_VIEW_PROPERTY(statusBarAnimation, UIStatusBarAnimation);
 
 - (UIView *)view
 {

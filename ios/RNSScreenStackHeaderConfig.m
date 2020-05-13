@@ -349,7 +349,6 @@
     // system default is UIRectEdgeAll
     vc.edgesForExtendedLayout = UIRectEdgeAll;
   }
-
   [navctr setNavigationBarHidden:shouldHide animated:animated];
 
   if (shouldHide) {

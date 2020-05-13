@@ -57,6 +57,16 @@ declare module 'react-native-screens' {
      * @description When set to false the back swipe gesture will be disabled when the parent Screen is on top of the stack. The default value is true.
      */
     gestureEnabled?: boolean;
+    /**
+     * @host (iOS only)
+     * @description Sets the status bar color (similar to the <StatusBar /> component). Requires enabling (or deleting) `View controller-based status bar appearance` in your Info.plist file.
+     */
+    statusBarStyle?: 'default' | 'light-content' | 'dark-content';
+    /**
+     * @host (iOS only)
+     * @description Sets the status bar animation (similar to the <StatusBar /> component). Requires enabling (or deleting) `View controller-based status bar appearance` in your Info.plist file.
+     */
+    statusBarAnimation?: 'none' | 'fade' | 'slide';
   }
 
   export type ScreenContainerProps = ViewProps;
@@ -170,7 +180,5 @@ declare module 'react-native-screens' {
   export const ScreenStackHeaderLeftView: ComponentClass<ViewProps>;
   export const ScreenStackHeaderRightView: ComponentClass<ViewProps>;
   export const ScreenStackHeaderCenterView: ComponentClass<ViewProps>;
-  export const ScreenStackHeaderConfig: ComponentClass<
-    ScreenStackHeaderConfigProps
-  >;
+  export const ScreenStackHeaderConfig: ComponentClass<ScreenStackHeaderConfigProps>;
 }

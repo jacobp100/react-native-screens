@@ -50,6 +50,8 @@ typedef NS_ENUM(NSInteger, RNSScreenStackAnimation) {
 @property (nonatomic) BOOL gestureEnabled;
 @property (nonatomic) RNSScreenStackAnimation stackAnimation;
 @property (nonatomic) RNSScreenStackPresentation stackPresentation;
+@property (nonatomic) UIStatusBarStyle statusBarStyle;
+@property (nonatomic) UIStatusBarAnimation statusBarAnimation;
 
 - (void)notifyFinishTransitioning;
 
