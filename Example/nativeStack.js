@@ -4,6 +4,7 @@ import {
   Button,
   View,
   TextInput,
+  Modal,
   TouchableHighlight,
   Image,
   Text,
@@ -48,7 +49,7 @@ export class Stack extends Component {
   }
   removeByKey(key) {
     this.setState({
-      stack: this.state.stack.filter(v => key !== v),
+      stack: this.state.stack.filter((v) => key !== v),
     });
   }
   renderScreen = (key, index) => {
@@ -104,7 +105,9 @@ export class Stack extends Component {
 }
 
 class App extends Component {
-  renderScreen = key => {
+  state = { modalVisible: false };
+
+  renderScreen = (key) => {
     const index = COLORS.indexOf(key);
     const color = key;
     const pop = index > 0 ? () => this.stack.pop() : null;
@@ -132,6 +135,36 @@ class App extends Component {
         {pop && <Button title="Pop" onPress={pop} />}
         {push && <Button title="Push" onPress={push} />}
         {remove && <Button title="Remove middle screen" onPress={remove} />}
+        <Button
+          title="Open RN Modal"
+          onPress={() => {
+            this.setState({ modalVisible: true });
+          }}
+        />
+        <Modal animationType="slide" visible={this.state.modalVisible}>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              backgroundColor: 'cyan',
+            }}>
+            {pop && (
+              <Button
+                title="Pop"
+                onPress={() => {
+                  this.setState({ modalVisible: false });
+                  pop();
+                }}
+              />
+            )}
+            <Button
+              title="Close"
+              onPress={() => {
+                this.setState({ modalVisible: false });
+              }}
+            />
+          </View>
+        </Modal>
         <TextInput placeholder="Hello" style={styles.textInput} />
         <View style={{ height: 100, backgroundColor: 'red', width: '70%' }} />
       </View>
@@ -140,7 +173,7 @@ class App extends Component {
   render() {
     return (
       <Stack
-        ref={stack => (this.stack = stack)}
+        ref={(stack) => (this.stack = stack)}
         renderScreen={this.renderScreen}
       />
     );
